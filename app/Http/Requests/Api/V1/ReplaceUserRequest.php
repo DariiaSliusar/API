@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests\Api\V1;
 
+use Illuminate\Foundation\Http\FormRequest;
 
-use Illuminate\Contracts\Validation\ValidationRule;
-
-class StoreUserRequest extends BaseUserRequest
+class ReplaceUserRequest extends BaseUserRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,15 +17,17 @@ class StoreUserRequest extends BaseUserRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, ValidationRule|array|string>
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'data.attributes.name' => 'required|string',
             'data.attributes.email' => 'required|email',
             'data.attributes.isManager' => 'required|boolean',
             'data.attributes.password' => 'required|string',
         ];
+
+        return $rules;
     }
 }

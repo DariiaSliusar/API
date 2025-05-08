@@ -31,7 +31,7 @@ class TicketController extends ApiController
     {
         try {
             //policy
-            $this->isAble('store', Ticket::class);;
+            $this->isAble('store', Ticket::class);
 
             // TODO: create ticket
             return new TicketResource(Ticket::create($request->mappedAttributes()));
