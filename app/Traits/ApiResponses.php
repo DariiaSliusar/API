@@ -17,11 +17,25 @@ trait ApiResponses {
         ], $statusCode);
     }
 
-    protected function error($message, $statusCode): \Illuminate\Http\JsonResponse
+    protected function error($errors = [], $statusCode = null): \Illuminate\Http\JsonResponse
     {
+        if (is_string($errors)) {
+            return response()->json([
+                'message' => $errors,
+                'status' => $statusCode,
+            ], $statusCode);
+        }
         return response()->json([
+            'errors' => $errors
+        ]);
+    }
+
+    protected function notAuthorized($message)
+    {
+        return $this->error([
+            'status' => 401,
             'message' => $message,
-            'status' => $statusCode,
-        ], $statusCode);
+            'source' => ''
+        ]);
     }
 }
